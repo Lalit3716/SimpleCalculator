@@ -1,9 +1,15 @@
 const buttons = document.querySelectorAll(".button");
+const card = document.querySelector(".card");
+const hiddenButtons = document.querySelectorAll(".hidden");
 const input = document.querySelector("#input");
 const preview = document.querySelector(".preview > span");
 
-const operators = ["+", "-", "×", "÷", "%"];
+let expression = "";
+const operators = ["+", "-", "*", "÷", "%"];
+const funcs = ["sin", "cos", "tan", "log10", "ln"];
+const constants = ["π"];
 
+// Animation Configuration for expression preview text
 const anim = [
   { transform: "translateY(50px)", "font-size": "1.8rem" },
   {
@@ -18,45 +24,62 @@ const animSettings = {
   easing: "ease-out",
 };
 
-const calculate = expr => {
-  expr = expr.replaceAll("÷", "/");
-
+const calculate = () => {
+  let temp;
   try {
-    input.value = eval(expr);
+    temp = input.value;
+    input.value = eval(expression).toFixed(2);
+    expression = input.value;
   } catch (err) {
     input.value = "Syntax Error";
   }
-
   preview.parentElement.animate(anim, animSettings);
-  preview.innerText = expr.replaceAll("*", "×").replaceAll("/", "÷");
+  preview.innerText = temp;
 };
-
-input.addEventListener("keydown", e => {
-  if (e.keyCode === 13) {
-    if (input.value.trim() === "") return;
-    calculate(input.value);
-  }
-});
 
 buttons.forEach(button => {
   button.addEventListener("click", () => {
-    if (
+    if (button.id === "backspace") {
+      expression = expression.slice(0, -1);
+      input.value = input.value.slice(0, -1);
+    } else if (
       parseInt(button.innerText) ||
-      button.innerText === "0" ||
-      button.innerText === "."
+      "().0".includes(button.innerText)
     ) {
       input.value += button.innerText;
-    } else if (button.innerText === "C") {
+      expression += button.innerText;
+    } else if (button.innerText === "AC") {
       input.value = "";
+      expression = "";
       preview.innerText = "";
     } else if (operators.includes(button.innerText)) {
-      input.value += button.innerText;
+      if (button.innerText === "%") {
+        input.value += "*0.01*";
+        expression += "*0.01*";
+      } else {
+        input.value += button.innerText;
+        if (button.innerText === "÷") {
+          expression += " / ";
+        } else {
+          expression += button.innerText;
+        }
+      }
     } else if (button.innerText === "=") {
       if (input.value.trim() === "") return;
-      const expr = input.value.replaceAll("×", "*");
-      calculate(expr);
-    } else {
-      input.value = input.value.slice(0, -1);
+      calculate();
+    } else if (funcs.includes(button.id)) {
+      input.value += `${button.id}(`;
+      if (button.id === "ln") {
+        expression += "2.303 * Math.log10(";
+      } else {
+        expression += `Math.${button.id}(`;
+      }
+    } else if (constants.includes(button.id)) {
+      input.value += button.id;
+      expression += `Math.${button.id === "π" ? "PI" : button.id}`;
+    } else if (button.id === "pow") {
+      input.value += "**";
+      expression += "**";
     }
   });
 });
