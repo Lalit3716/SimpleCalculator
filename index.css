@@ -14,6 +14,15 @@ body {
   overflow: auto;
 }
 
+.main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
 .heading {
   margin-top: 2rem;
   text-align: center;
@@ -40,7 +49,7 @@ body {
   cursor: text;
 }
 
-.card {
+.calc {
   width: clamp(25%, 400px, 80%);
   background-color: #434343;
   border-radius: 0.5rem;
@@ -58,7 +67,6 @@ body {
   min-width: 50px;
   width: 100%;
   height: 4rem;
-  border: none;
   border: 1px solid #2c2c2c;
   background-color: #434343;
   color: white;
@@ -67,10 +75,13 @@ body {
   outline: none;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  box-shadow: 0.5rem 0rem 1rem rgba(0, 0, 0, 0.5);
 }
 
 .button:hover {
   background-color: #232323;
+  transform: scale(1.05);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
 }
 
 #clear {

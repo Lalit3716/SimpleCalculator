@@ -11,7 +11,10 @@ const constants = ["π"];
 
 // Animation Configuration for expression preview text
 const anim = [
-  { transform: "translateY(50px)", "font-size": "1.8rem" },
+  {
+    transform: "translateY(50px)",
+    "font-size": "1.8rem",
+  },
   {
     transform: "translateY(0px)",
     "font-size": "1rem",
@@ -24,11 +27,16 @@ const animSettings = {
   easing: "ease-out",
 };
 
+const round = (value, precision) => {
+  var multiplier = Math.pow(10, precision || 0);
+  return Math.round(value * multiplier) / multiplier;
+};
+
 const calculate = () => {
   let temp;
   try {
     temp = input.value;
-    input.value = eval(expression).toFixed(2);
+    input.value = round(eval(expression), 10);
     expression = input.value;
   } catch (err) {
     input.value = "Syntax Error";
@@ -78,7 +86,7 @@ buttons.forEach(button => {
       input.value += button.id;
       expression += `Math.${button.id === "π" ? "PI" : button.id}`;
     } else if (button.id === "pow") {
-      input.value += "**";
+      input.value += "^";
       expression += "**";
     }
   });
