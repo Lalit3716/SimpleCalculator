@@ -1,35 +1,28 @@
+// DOM Elements
 const buttons = document.querySelectorAll(".button");
 const card = document.querySelector(".card");
-const hiddenButtons = document.querySelectorAll(".hidden");
+const historyContainer = document.querySelector(".history");
+const openHistory = document.querySelector(".open-history");
+const closeHistory = document.querySelector(".close-history");
 const input = document.querySelector("#input");
 const preview = document.querySelector(".preview > span");
 
+// Variables
 let expression = "";
 const operators = ["+", "-", "*", "÷", "%"];
 const funcs = ["sin", "cos", "tan", "log10", "ln"];
 const constants = ["π"];
 
-// Animation Configuration for expression preview text
-const anim = [
-  {
-    transform: "translateY(50px)",
-    "font-size": "1.8rem",
-  },
-  {
-    transform: "translateY(0px)",
-    "font-size": "1rem",
-  },
-];
-
-const animSettings = {
-  duration: 500,
-  iterations: 1,
-  easing: "ease-out",
-};
-
+// Helper Functions
 const round = (value, precision) => {
   var multiplier = Math.pow(10, precision || 0);
   return Math.round(value * multiplier) / multiplier;
+};
+
+const addHistoryToDOM = (expression, result) => {
+  const historyItem = document.createElement("li");
+  historyItem.innerHTML = `<span class="list-style">-></span> <span class="exp">${expression}</span> = <span class="result">${result}</span>`;
+  historyContainer.querySelector("ul").appendChild(historyItem);
 };
 
 const calculate = () => {
@@ -41,10 +34,30 @@ const calculate = () => {
   } catch (err) {
     input.value = "Syntax Error";
   }
-  preview.parentElement.animate(anim, animSettings);
+  preview.parentElement.animate(previewAnim, previewAnimSettings);
+  addHistoryToDOM(temp, input.value);
   preview.innerText = temp;
 };
 
+// Animation Configuration for expression preview text
+const previewAnim = [
+  {
+    transform: "translateY(50px)",
+    "font-size": "1.8rem",
+  },
+  {
+    transform: "translateY(0px)",
+    "font-size": "1rem",
+  },
+];
+
+const previewAnimSettings = {
+  duration: 500,
+  iterations: 1,
+  easing: "ease-out",
+};
+
+// Event Listeners
 buttons.forEach(button => {
   button.addEventListener("click", () => {
     if (button.id === "backspace") {
@@ -90,4 +103,14 @@ buttons.forEach(button => {
       expression += "**";
     }
   });
+});
+
+openHistory.addEventListener("click", () => {
+  historyContainer.classList.add("animate-history");
+  historyContainer.classList.remove("animate-history-reverse");
+});
+
+closeHistory.addEventListener("click", () => {
+  historyContainer.classList.remove("animate-history");
+  historyContainer.classList.add("animate-history-reverse");
 });
