@@ -1,0 +1,12 @@
+.grid {
+  min-width: 400px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 80px);
+}
+
+@media (max-width: 400px) {
+  .grid {
+    min-width: 300px;
+  }
+}

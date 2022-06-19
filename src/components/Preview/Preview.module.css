@@ -1,0 +1,49 @@
+.preview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1rem;
+  width: 400px;
+  height: 100%;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: right;
+  background-color: #e3e3e3;
+  color: black;
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  grid-column: 1 / span 4;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.preview span {
+  display: block;
+  width: 100%;
+}
+
+.secondary {
+  color: #7e7d7d;
+  font-weight: normal;
+  font-size: 1.3rem;
+}
+
+.preview::-webkit-scrollbar {
+  height: 0.2rem;
+}
+
+.preview::-webkit-scrollbar-thumb {
+  background-color: #151414;
+  border-radius: 0.5rem;
+}
+
+.preview::-webkit-scrollbar-track {
+  background-color: #434343;
+}
+
+@media (max-width: 400px) {
+  .preview {
+    width: 300px;
+  }
+}
