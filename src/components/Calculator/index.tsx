@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import Button from "../Button";
 import Preview from "../Preview";
 import styles from "./Calculator.module.css";
@@ -10,7 +11,9 @@ const Calculator = () => {
   const handleClick = (value: string) => {
     const newExpression = expression + value;
     setExpression(newExpression);
-    if (!isNaN(Number(value))) setResult(eval(newExpression).toString());
+    if (!isNaN(Number(value)) || value === "π") {
+      calculate(newExpression);
+    }
   };
 
   const handleClear = () => {
@@ -22,21 +25,33 @@ const Calculator = () => {
     const newExpression = expression.slice(0, -1);
     setExpression(newExpression);
     if (result) {
-      if (!isNaN(Number(newExpression[newExpression.length - 1])))
-        setResult(eval(newExpression).toString());
+      if (!isNaN(Number(newExpression[newExpression.length - 1]))) {
+        calculate(newExpression.toString());
+      }
     }
   };
 
   const handleEqual = () => {
     setExpression(result.toString());
     setResult("");
+    if (result === "Syntax Error") {
+      toast.error("Invalid expression");
+    }
   };
 
   const handlePercent = () => {
     if (!expression) return;
     const newExpression = expression + "*0.01";
     setExpression(newExpression);
-    setResult(eval(newExpression).toString());
+    calculate(newExpression);
+  };
+
+  const calculate = (exp: string) => {
+    try {
+      setResult(eval(exp.replaceAll("π", "Math.PI")).toString());
+    } catch (error) {
+      setResult("Syntax Error");
+    }
   };
 
   return (
