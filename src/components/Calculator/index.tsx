@@ -60,7 +60,7 @@ const Calculator = () => {
         primary={expression || "0"}
         secondary={expression ? result : ""}
       />
-      <Button value="AC" color="red" onClick={handleClear} />
+      <Button value="AC" color="#f34646" onClick={handleClear} />
       <Button
         faIcon="fa-solid fa-delete-left"
         value="delete"
