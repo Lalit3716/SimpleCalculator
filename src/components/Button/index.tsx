@@ -21,7 +21,9 @@ const Button: React.FC<Props> = ({
   return (
     <button
       className={styles.btn}
-      style={{ color: _color }}
+      style={{
+        color: _color,
+      }}
       onClick={() => (onClick ? onClick(value) : null)}
     >
       {faIcon ? <i className={faIcon} /> : value}

@@ -32,6 +32,13 @@ const Calculator = () => {
     setResult("");
   };
 
+  const handlePercent = () => {
+    if (!expression) return;
+    const newExpression = expression + "*0.01";
+    setExpression(newExpression);
+    setResult(eval(newExpression).toString());
+  };
+
   return (
     <div className={styles.grid}>
       <Preview
@@ -45,7 +52,12 @@ const Calculator = () => {
         operator
         onClick={handleDelete}
       />
-      <Button faIcon="fa-solid fa-percent" value="percent" operator />
+      <Button
+        faIcon="fa-solid fa-percent"
+        value="percent"
+        operator
+        onClick={handlePercent}
+      />
       <Button
         faIcon="fa-solid fa-divide"
         value="/"
@@ -61,13 +73,13 @@ const Calculator = () => {
         operator
         onClick={handleClick}
       />
-      <Button value="6" onClick={handleClick} />
-      <Button value="5" onClick={handleClick} />
       <Button value="4" onClick={handleClick} />
+      <Button value="5" onClick={handleClick} />
+      <Button value="6" onClick={handleClick} />
       <Button value="-" operator onClick={handleClick} />
-      <Button value="3" onClick={handleClick} />
-      <Button value="2" onClick={handleClick} />
       <Button value="1" onClick={handleClick} />
+      <Button value="2" onClick={handleClick} />
+      <Button value="3" onClick={handleClick} />
       <Button value="+" operator onClick={handleClick} />
       <Button value="π" onClick={handleClick} />
       <Button value="." onClick={handleClick} />
