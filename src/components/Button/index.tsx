@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import useTheme from "../../hooks/useTheme";
 import styles from "./Button.module.css";
 
 interface Props {
@@ -17,10 +18,11 @@ const Button: React.FC<Props> = ({
   onClick,
 }) => {
   let _color = operator ? "orange" : color;
+  const { darkMode } = useTheme();
 
   return (
     <button
-      className={styles.btn}
+      className={`${styles.btn} ${darkMode ? styles.dark : styles.light}`}
       style={{
         color: _color,
       }}
