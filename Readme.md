@@ -6,23 +6,21 @@
 
 <br>
 
-<h2>
-    This Project is made as a task given to me by GDSC-IET to showcase my skills in web development and to practice my skills in writing code.  
-</h2>
+### This Project is made as a task given to me by GDSC-IET to showcase my skills in web development and to practice my skills in writing code.  
 
 <br>
 
 # How to run?
 
-## 1. Download the source code by clicking download button or clone the repository
+### 1. Download Node.JS if already not installed.
 
-## 2. Go or `cd` into the directory/folder containing the source code and open terminal.
+### 2. Download the source code by clicking download button or clone the repository
 
-## 3. Install dependencies using
+### 3. Go or `cd` into the directory/folder containing the source code and open terminal.
 
-## `npm install`
+### 4. Install dependencies using `npm install`
 
-## 4. Run the application using `npm run dev`
+### 5. Run the application using `npm run dev`
 
 <br>
 
