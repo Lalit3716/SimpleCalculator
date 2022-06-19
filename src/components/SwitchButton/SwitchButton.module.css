@@ -21,14 +21,14 @@
   }
   100% {
     transform: rotate(360deg);
-    color: #f3ff0a;
+    color: #ffb10a;
   }
 }
 
 @keyframes night {
   0% {
     transform: rotate(0deg);
-    color: #f3ff0a;
+    color: #ffb10a;
   }
   100% {
     transform: rotate(360deg);
