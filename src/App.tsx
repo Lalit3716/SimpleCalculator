@@ -1,9 +1,9 @@
 import React from "react";
-import ButtonGrid from "./components/ButtonGrid";
+import Calculator from "./components/Calculator";
 
 const App: React.FC = () => (
   <div>
-    <ButtonGrid />
+    <Calculator />
   </div>
 );
 
